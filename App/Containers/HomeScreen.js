@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, Button } from 'react-native'
 
 import styles from '../Stylesheets/AppStylesheet'
 
-export default class AppScreen extends Component {
+export default class HomeScreen extends Component {
+  
+  static navigationOptions = {
+    header: null
+  }
 
   componentDidMount() {
     console.log("Component mount")
@@ -14,9 +18,12 @@ export default class AppScreen extends Component {
   }
 
   render() {
+    const { navigate } = this.props.navigation
+
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text style={styles.helloWorld}>Hello, world!</Text>
+        <Text style={styles.helloWorld}>Home Screen!</Text>
+        <Button title="Make Transaction" onPress={() => navigate("Transaction")}/>
       </View>
     )
   }
