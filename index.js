@@ -8,6 +8,9 @@ import reducers from './App/Redux/reducers'
 import {  createStore } from 'redux'
 import { Provider } from 'react-redux'
 
+//For monitoring redux
+import devToolsEnhancer from 'remote-redux-devtools';
+
 import HomeScreen from './App/Containers/HomeScreen'
 import TransactionScreen from './App/Containers/TransactionScreen'
 
@@ -18,7 +21,8 @@ const ScreensContainer = createAppContainer(
   })
 )
 
-let store = createStore(reducers) 
+//Added devToolsEnhancer for monitoring
+let store = createStore(reducers, devToolsEnhancer()) 
 
 class App extends Component {
   render() {
