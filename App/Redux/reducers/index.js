@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
 
 //Reducers
-import ShoppingCart from './ShoppingCart'
+import CryptoReducer from './CryptoReducer'
 
 export default combineReducers ({
-  ShoppingCart
+  crypto: CryptoReducer
 })
