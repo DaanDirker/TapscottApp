@@ -1,5 +1,5 @@
 import { Platform } from 'react-native'
-import { composeWithDevTools } from 'remote-redux-devtools'
+import { composeWithDevTools } from 'redux-devtools-extension';
 import promise from 'redux-promise'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
