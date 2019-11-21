@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
 
 //Reducers
-import CryptoReducer from './CryptoReducer'
+import PaymentReducer from './PaymentReducer'
+import DonationReducer from './DonationReducer'
 
 export default combineReducers ({
-  crypto: CryptoReducer
+  payment: PaymentReducer,
+  donation: DonationReducer
 })
