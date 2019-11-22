@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
 
 //Reducers
-import ShoppingCart from './ShoppingCart'
+import PaymentReducer from './PaymentReducer'
+import DonationReducer from './DonationReducer'
 
 export default combineReducers ({
-  ShoppingCart
+  payment: PaymentReducer,
+  donation: DonationReducer
 })
