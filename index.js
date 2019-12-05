@@ -19,8 +19,8 @@ const DonationStack = createStackNavigator({
 
 const ScreensContainer = createAppContainer(
   createStackNavigator({
-    Donation: { screen: DonationStack },
     Home: { screen: HomeScreen },
+    Donation: { screen: DonationStack },
     Transaction: { screen: TransactionScreen }
   }, {
     headerMode: 'none'

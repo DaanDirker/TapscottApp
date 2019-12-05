@@ -1,30 +1,47 @@
 import React, { Component } from 'react'
-import { View, Text, Button } from 'react-native'
+import { View, ScrollView, Dimensions, ImageBackground, Button } from 'react-native'
+import ScaledImage from '../Components/ScaledImage'
+import Waves from '../Components/Waves'
 
-import styles from '../Stylesheets/AppStylesheet'
+import styles from '../Stylesheets/HomeStylesheet'
+
+const screenWidth = Math.round(Dimensions.get('window').width)
 
 export default class HomeScreen extends Component {
-  
-  static navigationOptions = {
-    header: null
-  }
-
-  componentDidMount() {
-    console.log("Component mount")
-
-    this.setState(previousState => {
-      //Change state example
-    })
-  }
-
   render() {
     const { navigate } = this.props.navigation
 
+    scrollToBottom = () => {
+      this.scrollView.scrollToEnd({duration: 500})
+    }
+
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text style={styles.helloWorld}>Home Screen!</Text>
-        <Button title="Make Transaction" onPress={() => navigate("Transaction")}/>
-      </View>
+      <ScrollView style={styles.scrollContainer}
+        ref={ref => this.scrollView = ref}>
+
+        <View style={styles.skyContainer}>
+          <Button
+            title="Press me"
+            onPress={() => scrollToBottom()}
+          />
+          <ScaledImage
+            source={require('../Assets/images/Sky.png')}
+            width={screenWidth} />
+        </View>
+
+        <View style={styles.seaContainer, styles.backgroundWaves}>
+          <ScaledImage
+            source={require('../Assets/images/Sea.png')}
+            width={screenWidth} />
+          {/* <Waves /> */}
+        </View>
+
+        <View style={styles.sandContainer}>
+          {
+            //Contains switching of tabs using state and subscription
+          }
+        </View>
+      </ScrollView>
     )
   }
 }
