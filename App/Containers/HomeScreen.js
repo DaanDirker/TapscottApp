@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { View, ScrollView, Dimensions, ImageBackground, Button } from 'react-native'
+import { View, ScrollView, Dimensions, Text, Button } from 'react-native'
 import ScaledImage from '../Components/ScaledImage'
-import Waves from '../Components/Waves'
+import SelectionGroup from "../Components/SelectionGroup/SelectionGroup"
+import BoeiButton from '../Components/BoeiButton/BoeiButton'
 
 import styles from '../Stylesheets/HomeStylesheet'
 
@@ -12,23 +13,22 @@ export default class HomeScreen extends Component {
     const { navigate } = this.props.navigation
 
     scrollToBottom = () => {
-      this.scrollView.scrollToEnd({duration: 500})
+      this.scrollView.scrollToEnd({duration: 4000})
     }
 
     return (
-      <ScrollView style={styles.scrollContainer}
-        ref={ref => this.scrollView = ref}>
-
+      <ScrollView style={styles.scrollContainer} ref={ref => this.scrollView = ref}>
         <View style={styles.skyContainer}>
-          <Button
-            title="Press me"
-            onPress={() => scrollToBottom()}
-          />
           <ScaledImage
             source={require('../Assets/images/Sky.png')}
-            width={screenWidth} />
+            width={screenWidth}>
+              <View style={styles.headingContainer}>
+                <Text style={styles.heading}>TAPSCOTT</Text>
+                <Text style={styles.subtitle}>Save the ocean through Blockchain!</Text>
+                <BoeiButton onPress={() => scrollToBottom()}/>
+              </View>
+            </ScaledImage>
         </View>
-
         <View style={styles.seaContainer, styles.backgroundWaves}>
           <ScaledImage
             source={require('../Assets/images/Sea.png')}
@@ -37,9 +37,13 @@ export default class HomeScreen extends Component {
         </View>
 
         <View style={styles.sandContainer}>
-          {
-            //Contains switching of tabs using state and subscription
-          }
+          <View style={{alignItems: 'center', marginBottom: 34}}>
+            <Text style={styles.donationHeading}>Save the ocean now!</Text>
+            <Text style={styles.donationSubtitle}>Every dollar counts</Text>
+          </View>
+          <View style={styles.donationContainer}>
+              <SelectionGroup navigation={this.props.navigation}/>
+          </View>
         </View>
       </ScrollView>
     )

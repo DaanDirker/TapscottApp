@@ -7,20 +7,12 @@ import { Provider } from 'react-redux'
 
 import HomeScreen from './App/Containers/HomeScreen'
 import TransactionScreen from './App/Containers/TransactionScreen'
-import DonationContainer from './App/Containers/DonationContainer'
 import WebviewContainer from './App/Containers/WebviewContainer'
-
-const DonationStack = createStackNavigator({
-  Donation: { screen: DonationContainer },
-  Webview: { screen: WebviewContainer }
-}, {
-  headerMode: 'none'
-})
 
 const ScreensContainer = createAppContainer(
   createStackNavigator({
     Home: { screen: HomeScreen },
-    Donation: { screen: DonationStack },
+    Webview: { screen: WebviewContainer },  
     Transaction: { screen: TransactionScreen }
   }, {
     headerMode: 'none'

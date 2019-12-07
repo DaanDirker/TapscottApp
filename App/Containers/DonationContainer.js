@@ -19,8 +19,7 @@ class DonationContainer extends Component {
     await this.props.fetchPayment(this.props.amount, this.props.name)
 
     if (this.props.payment.checkoutUrl) {
-      const { navigate } = this.props.navigation
-      navigate('Webview')
+      this.props.navigate('Webview')
     }
   }
 
