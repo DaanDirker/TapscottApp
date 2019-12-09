@@ -25,8 +25,10 @@ export default StyleSheet.create({
   },
   donateButton: {
     marginTop: 8,
+    marginBottom: 16,
     height: 60,
-    width: 150
+    width: 150,
+    backgroundColor: '#534741'
   },
   loading: {
     position: 'absolute',

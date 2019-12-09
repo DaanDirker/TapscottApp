@@ -104,7 +104,7 @@ class DonationContainer extends Component {
         </View>
         <View style={styles.row}>
           <View style={{flex: 1, alignItems: 'flex-end'}}>
-            <RoundedButton amount="Donate" currency="" style={styles.donateButton}
+            <RoundedButton amount="Donate" currency="" style={styles.donateButton} textStyle={{color: '#FFFFFF'}}
               onPress={() => this.handleCheckout(this.props.donationAmount, this.props.donationName)}/>
           </View>
         </View>
