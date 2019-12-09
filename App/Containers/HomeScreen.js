@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { View, ScrollView, Dimensions, Text, Button } from 'react-native'
+import { View, ScrollView, Dimensions, Text } from 'react-native'
 import ScaledImage from '../Components/ScaledImage'
-import SelectionGroup from "../Components/SelectionGroup/SelectionGroup"
+import DonationContainer from "./DonationContainer/DonationContainer"
 import BoeiButton from '../Components/BoeiButton/BoeiButton'
 
 import styles from '../Stylesheets/HomeStylesheet'
@@ -37,12 +37,8 @@ export default class HomeScreen extends Component {
         </View>
 
         <View style={styles.sandContainer}>
-          <View style={{alignItems: 'center', marginBottom: 34}}>
-            <Text style={styles.donationHeading}>Save the ocean now!</Text>
-            <Text style={styles.donationSubtitle}>Every dollar counts</Text>
-          </View>
           <View style={styles.donationContainer}>
-              <SelectionGroup navigation={this.props.navigation}/>
+              <DonationContainer navigation={this.props.navigation}/>
           </View>
         </View>
       </ScrollView>

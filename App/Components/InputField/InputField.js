@@ -14,6 +14,7 @@ export default class InputField extends Component {
         <View style={[styles.container, this.props.backgroundStyles]}>
           <TextInput
             onFocus={this.props.onFocus}
+            textAlign={'center'}
             onChangeText={this.props.onChangeText}
             placeholder={this.props.placeholder}
             style={[styles.input, this.props.inputStyles]}

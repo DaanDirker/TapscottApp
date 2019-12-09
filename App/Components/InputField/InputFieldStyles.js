@@ -6,7 +6,6 @@ export default StyleSheet.create({
     borderRadius: 8,
     backgroundColor: '#B7A08C',
     justifyContent: 'center',
-    alignItems: 'center'
   },
   input: {
     padding: 4,

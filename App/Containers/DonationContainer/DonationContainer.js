@@ -1,5 +1,6 @@
 import React, { Component } from "react"
-import { View } from "react-native"
+import LoadingSpinner from "../../Components/LoadingSpinner/LoadingSpinner"
+import { View, Text } from "react-native"
 import { connect } from 'react-redux'
 import { fetchPayment } from '../../Redux/actions/PaymentActions'
 import { 
@@ -7,12 +8,12 @@ import {
   setDonationName, 
   setDonationCustom } from '../../Redux/actions/DonationActions'
 
-import RoundedButton from "../RoundedButton/RoundedButton"
-import InputField from "../InputField/InputField"
+import RoundedButton from "../../Components/RoundedButton/RoundedButton"
+import InputField from "../../Components/InputField/InputField"
 
-import styles from "./SelectionGroupStyles"
+import styles from "./DonationContainerStyles"
 
-class SelectionGroup extends Component {
+class DonationContainer extends Component {
 
   constructor(props) {
     super(props)
@@ -24,9 +25,15 @@ class SelectionGroup extends Component {
   async handleCheckout(amount, name) {
     await this.props.fetchPayment(amount + ".00", name)
 
-    if (this.props.payment.checkoutUrl) {
+    if (this.props.payment.data.checkoutUrl) {
       const { navigate } = this.props.navigation
       navigate("Webview")
+    }
+  }
+
+  renderSpinner() {
+    if (this.props.payment.isFetching) {
+      return <LoadingSpinner/>
     }
   }
 
@@ -43,7 +50,11 @@ class SelectionGroup extends Component {
 
   render() {
     return (
-      <View style={{flex: 1, maxWidth: 360}}>
+      <View style={{flex: 1, maxWidth: 340}}>
+        <View style={{alignItems: 'center', marginBottom: 34}}>
+          <Text style={styles.donationHeading}>Save the ocean now!</Text>
+          <Text style={styles.donationSubtitle}>Every dollar counts</Text>
+        </View>
         <View style={styles.row}>
           {/* First Row */}
           <View style={styles.buttonContainer}>
@@ -97,6 +108,9 @@ class SelectionGroup extends Component {
               onPress={() => this.handleCheckout(this.props.donationAmount, this.props.donationName)}/>
           </View>
         </View>
+        <View style={styles.loading}>
+          {this.renderSpinner()}
+        </View>
       </View>
     )
   }
@@ -107,7 +121,7 @@ const mapStateToProps = (state) => {
     donationName: state.donation.name,
     donationAmount: state.donation.amount,
     isCustom: state.donation.custom,
-    payment: state.payment.data
+    payment: state.payment
   }
 }
 
@@ -120,4 +134,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SelectionGroup)
+export default connect(mapStateToProps, mapDispatchToProps)(DonationContainer)

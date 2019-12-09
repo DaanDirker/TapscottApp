@@ -17,16 +17,6 @@ export default StyleSheet.create({
     color: '#292929',
     fontSize: 18
   },
-  donationHeading: {
-    fontSize: 26,
-    fontFamily: 'Bitter-Bold',
-    color: '#000000'
-  },
-  donationSubtitle: {
-    fontSize: 20,
-    fontFamily: 'Bitter-Regular',
-    color: '#292929'
-  },
   scrollContainer: {
   },
   skyContainer: {
