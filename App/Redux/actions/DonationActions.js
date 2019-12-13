@@ -3,7 +3,7 @@ import {
   SET_DONATION_AMOUNT, 
   SET_DONATION_NAME,
   SET_DONATION_CUSTOM
-} from '../../Utils/ActionTypes'
+} from './ActionTypes'
 
 export const setDonation = (inputAmount, inputName, isCustom) => {
   return dispatch => {

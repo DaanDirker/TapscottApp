@@ -3,7 +3,7 @@ import {
   SET_DONATION_NAME, 
   SET_DONATION_AMOUNT,
   SET_DONATION_CUSTOM
-} from '../../Utils/ActionTypes'
+} from '../actions/ActionTypes'
   
 const initialState = {
   name: 'Anonymous',

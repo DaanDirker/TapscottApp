@@ -5,15 +5,13 @@ import { createAppContainer } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
 import { Provider } from 'react-redux'
 
-import HomeScreen from './App/Containers/HomeScreen'
-import TransactionScreen from './App/Containers/TransactionScreen'
-import WebviewContainer from './App/Containers/WebviewContainer'
+import HomeScreen from './App/Containers/HomeContainer/HomeContainer'
+import WebviewContainer from './App/Containers/WebviewContainer/WebviewContainer'
 
 const ScreensContainer = createAppContainer(
   createStackNavigator({
     Home: { screen: HomeScreen },
     Webview: { screen: WebviewContainer },  
-    Transaction: { screen: TransactionScreen }
   }, {
     headerMode: 'none'
   })

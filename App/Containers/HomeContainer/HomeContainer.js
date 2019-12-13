@@ -1,17 +1,15 @@
 import React, { Component } from 'react'
 import { View, ScrollView, Dimensions, Text } from 'react-native'
-import ScaledImage from '../Components/ScaledImage'
-import DonationContainer from "./DonationContainer/DonationContainer"
-import BoeiButton from '../Components/BoeiButton/BoeiButton'
+import ScaledImage from '../../Components/ScaledImage'
+import DonationContainer from "../DonationContainer/DonationContainer"
+import BoeiButton from '../../Components/BoeiButton/BoeiButton'
 
-import styles from '../Stylesheets/HomeStylesheet'
+import styles from './HomeContainerStyles'
 
 const screenWidth = Math.round(Dimensions.get('window').width)
 
-export default class HomeScreen extends Component {
+export default class HomeContainer extends Component {
   render() {
-    const { navigate } = this.props.navigation
-
     scrollToBottom = () => {
       this.scrollView.scrollToEnd({duration: 4000})
     }
@@ -20,7 +18,7 @@ export default class HomeScreen extends Component {
       <ScrollView style={styles.scrollContainer} ref={ref => this.scrollView = ref}>
         <View style={styles.skyContainer}>
           <ScaledImage
-            source={require('../Assets/images/Sky.png')}
+            source={require('../../Assets/images/Sky.png')}
             width={screenWidth}>
               <View style={styles.headingContainer}>
                 <Text style={styles.heading}>TAPSCOTT</Text>
@@ -31,7 +29,7 @@ export default class HomeScreen extends Component {
         </View>
         <View style={styles.seaContainer, styles.backgroundWaves}>
           <ScaledImage
-            source={require('../Assets/images/Sea.png')}
+            source={require('../../Assets/images/Sea.png')}
             width={screenWidth} />
           {/* <Waves /> */}
         </View>
