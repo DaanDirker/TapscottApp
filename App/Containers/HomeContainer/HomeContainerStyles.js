@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native'
+import { widthPercentageToDP, heightPercentageToDP } from 'react-native-responsive-screen'
 
 const screenWidth = Math.round(Dimensions.get('window').width)
 const screenHeight = Math.round(Dimensions.get('window').height)
@@ -10,23 +11,36 @@ export default StyleSheet.create({
     color: '#1A1A1A',
     fontFamily: 'Bitter-Bold',
     fontSize: 36,
-    marginBottom: 8
   },
   subtitle: {
     fontFamily: 'Bitter-Regular',
     color: '#292929',
     fontSize: 18
   },
-  scrollContainer: {
+  raisedHeading: {
+    color: '#1A1A1A',
+    fontFamily: 'Bitter-Regular',
+    fontSize: 36,
   },
-  skyContainer: {
+  headingContainer: {
+    marginTop: 70,
+    alignItems: 'center'
+  },
+  boeiButton: {
+    width: 105,
+    height: 167,
+  },
+  skyBackground: {
     height: skyHeight
   },
-  seaContainer: {
+  skyContent: {
     flex: 1,
+    height: 300,
+    alignItems: 'center',
   },
-  backgroundWaves: {
-    // position: 'absolute'
+  totalAmountContainer: {
+    marginTop: 100,
+    alignItems: 'center'
   },
   sandContainer: {
     backgroundColor: '#C7B299',
@@ -36,8 +50,4 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center'
   },
-  headingContainer: {
-    marginTop: 50,
-    alignItems: 'center'
-  }
 })

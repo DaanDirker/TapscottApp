@@ -15,15 +15,23 @@ export default class HomeContainer extends Component {
     }
 
     return (
-      <ScrollView style={styles.scrollContainer} ref={ref => this.scrollView = ref}>
-        <View style={styles.skyContainer}>
+      <ScrollView ref={ref => this.scrollView = ref}>
+        <View style={styles.skyBackground}>
           <ScaledImage
             source={require('../../Assets/images/Sky.png')}
             width={screenWidth}>
-              <View style={styles.headingContainer}>
-                <Text style={styles.heading}>TAPSCOTT</Text>
-                <Text style={styles.subtitle}>Save the ocean through Blockchain!</Text>
-                <BoeiButton onPress={() => scrollToBottom()}/>
+              <View style={styles.skyContent}>
+                <View style={styles.headingContainer}>
+                  <Text style={[styles.heading, {marginBottom: 8}]}>TAPSCOTT</Text>
+                  <Text style={styles.subtitle}>Save the ocean through Blockchain!</Text>
+                </View>
+                <View style={styles.totalAmountContainer}>
+                  <Text style={styles.heading}>$21.680</Text>
+                  <Text style={styles.subtitle}>Raised since January 1999</Text>
+                </View>
+                <View style={{flex: 1, justifyContent: 'flex-end', alignSelf: 'center', marginBottom: 1080}}>
+                  <BoeiButton style={styles.boeiButton} onPress={() => scrollToBottom()}/>
+                </View>
               </View>
             </ScaledImage>
         </View>

@@ -12,9 +12,10 @@ export default class InputField extends Component {
   render() {
     return (
       <View>
-        <TouchableOpacity onPress={this.props.onPress} style={{width:300, height:300}}>
+        <TouchableOpacity onPress={this.props.onPress}>
           <Image source={require('../../Assets/images/Boei.png')}
-            resizeMode='cover'/>
+            resizeMode='cover'
+            style={this.props.style}/>
         </TouchableOpacity>
       </View>
     )
