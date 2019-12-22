@@ -1,17 +1,34 @@
 import React, { Component } from 'react'
-import { View, ScrollView, Dimensions, Text } from 'react-native'
-import ScaledImage from '../../Components/ScaledImage'
+import { View, ScrollView, Dimensions, Text, Button } from 'react-native'
+import { connect } from 'react-redux'
+import { navigateTo } from '../../Redux/actions/BottomNavActions'
+import { BOTTOM_NAV_ACHIEVEMENTS, BOTTOM_NAV_DONATION } from '../../Utils/Constants'
+
 import DonationContainer from "../DonationContainer/DonationContainer"
+import AchievementsContainer from '../AchievementsContainer/AchievementsContainer'
+
+import ScaledImage from '../../Components/ScaledImage'
 import BoeiButton from '../../Components/BoeiButton/BoeiButton'
 
 import styles from './HomeContainerStyles'
 
 const screenWidth = Math.round(Dimensions.get('window').width)
+const scrollSpeed = 4000
 
-export default class HomeContainer extends Component {
+class HomeContainer extends Component {
+
+  handleBottomNav() {
+    switch(this.props.currentNav) {
+      case BOTTOM_NAV_ACHIEVEMENTS:
+        return <AchievementsContainer/>
+      case BOTTOM_NAV_DONATION:
+        return <DonationContainer navigation={this.props.navigation}/>
+    }
+  }
+
   render() {
     scrollToBottom = () => {
-      this.scrollView.scrollToEnd({duration: 4000})
+      this.scrollView.scrollToEnd({duration: scrollSpeed})
     }
 
     return (
@@ -44,10 +61,32 @@ export default class HomeContainer extends Component {
 
         <View style={styles.sandContainer}>
           <View style={styles.donationContainer}>
-              <DonationContainer navigation={this.props.navigation}/>
+            {this.handleBottomNav()}
+          </View>
+          <View>
+            <Button 
+              title='Donations'
+              onPress={() => this.props.navigateTo(BOTTOM_NAV_DONATION)}/>
+            <Button 
+              title='Achievements'
+              onPress={() => this.props.navigateTo(BOTTOM_NAV_ACHIEVEMENTS)}/>
           </View>
         </View>
       </ScrollView>
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    currentNav: state.bottomNav.currentBottomNav
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    navigateTo: (nav) => dispatch(navigateTo(nav))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer)
