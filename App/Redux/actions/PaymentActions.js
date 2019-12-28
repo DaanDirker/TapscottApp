@@ -4,7 +4,7 @@ import {
   FETCH_PAYMENT_CHECKOUT,
   FETCH_PAYMENT_CHECKOUT_SUCCESS,
   FETCH_PAYMENT_CHECKOUT_FAIL,
-} from '../../Utils/ActionTypes'
+} from './ActionTypes'
 
 export const fetchPayment = (amount, name) => {
   return dispatch => {

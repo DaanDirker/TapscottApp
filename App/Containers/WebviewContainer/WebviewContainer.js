@@ -4,9 +4,18 @@ import { connect } from 'react-redux'
 
 class WebviewContainer extends Component {
 
+  _onNavigationStateChange(webViewState) {
+    const { goBack } = this.props.navigation
+
+    if (webViewState.url == "https://www.google.com/") {
+      goBack()
+    }
+  }
+
   render() {
     return (
-      <WebView source={{ uri: this.props.payment.checkoutUrl }}/>
+      <WebView source={{ uri: this.props.payment.checkoutUrl }}
+        onNavigationStateChange={this._onNavigationStateChange.bind(this)}/>
     )
   }
 }

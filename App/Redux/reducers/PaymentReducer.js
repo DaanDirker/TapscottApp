@@ -2,7 +2,7 @@ import {
   FETCH_PAYMENT_CHECKOUT,
   FETCH_PAYMENT_CHECKOUT_SUCCESS,
   FETCH_PAYMENT_CHECKOUT_FAIL,
-} from '../../Utils/ActionTypes'
+} from '../actions/ActionTypes'
 
 const initialState = {
   isFetching: false,
