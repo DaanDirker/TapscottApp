@@ -10,7 +10,7 @@ export const fetchDonations = () => {
     return dispatch => {
         dispatch({ type: FETCH_DONATIONS })
 
-        return axios.get(apiBaseUrl + '/sum/payment')
+        return axios.get(apiBaseUrl + '/transaction/donations')
             .then(res => {
                 dispatch({ type: FETCH_DONATIONS_SUCCESS, payload: res.data })
                 console.log(res.data)

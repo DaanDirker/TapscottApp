@@ -9,7 +9,7 @@ import {
   FETCH_SUM_PAYMENT_FAIL,
 } from './ActionTypes'
 
-export const fetchSumDonation = () => {
+export const fetchSumDonations = () => {
   return dispatch => {
     dispatch({ type: FETCH_SUM_DONATION })
 
@@ -24,7 +24,7 @@ export const fetchSumDonation = () => {
   }
 }
 
-export const fetchSumPayment = () => {
+export const fetchSumPayments = () => {
   return dispatch => {
     dispatch({ type: FETCH_SUM_PAYMENT })
 
