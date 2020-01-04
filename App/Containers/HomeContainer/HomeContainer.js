@@ -26,6 +26,10 @@ class HomeContainer extends Component {
     }
   }
 
+  navigateTo(nav) {
+    this.props.navigateTo(nav)
+  }
+
   render() {
     scrollToBottom = () => {
       this.scrollView.scrollToEnd({duration: scrollSpeed})
@@ -66,10 +70,10 @@ class HomeContainer extends Component {
           <View>
             <Button 
               title='Donations'
-              onPress={() => this.props.navigateTo(BOTTOM_NAV_DONATION)}/>
+              onPress={() => this.navigateTo(BOTTOM_NAV_DONATION)}/>
             <Button 
               title='Achievements'
-              onPress={() => this.props.navigateTo(BOTTOM_NAV_ACHIEVEMENTS)}/>
+              onPress={() => this.navigateTo(BOTTOM_NAV_ACHIEVEMENTS)}/>
           </View>
         </View>
       </ScrollView>
