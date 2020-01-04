@@ -30,7 +30,7 @@ export default function (state = initialState, action) {
                 hasFailed: false,
                 errorMessage: null,
                 data: action.payload,
-                totalSum = action.payload
+                totalSum: action.payload
             })
         case FETCH_SUM_DONATION_FAIL:
             return Object.assign({}, state, {

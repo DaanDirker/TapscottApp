@@ -12,21 +12,9 @@ const screenWidth = Math.round(Dimensions.get('window').width)
 
 class HomeContainer extends Component {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      donationAmount = 0
-    }
-  }
-
-  async setSumDonation() {
-    //Testing code part for Sum number of donations
-    await this.props.fetchSumDonations()
-      .then((response) => document.getElementById('SumDonations') = response.data)
-      .catch(err => {
-        console.log('ERROR', err)
-      });
-    return "500";
+  componentDidMount() {
+    //Fetch total donation amount
+    this.props.fetchSumDonations()
   }
 
   render() {
@@ -46,7 +34,7 @@ class HomeContainer extends Component {
                 <Text style={styles.subtitle}>Save the ocean through Blockchain!</Text>
               </View>
               <View style={styles.totalAmountContainer}>
-                <Text id="SumDonations" style={styles.heading}>$21.680 {this.props.totalSum}</Text>
+                <Text id="SumDonations" style={styles.heading}>${this.props.totalSum}</Text>
                 <Text style={styles.subtitle}>Raised since January 1999</Text>
               </View>
               <View style={{ flex: 1, justifyContent: 'flex-end', alignSelf: 'center', marginBottom: 1080 }}>
