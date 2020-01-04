@@ -14,10 +14,6 @@ export const fetchDonations = () => {
             .then(res => {
                 dispatch({ type: FETCH_DONATIONS_SUCCESS, payload: res.data })
                 console.log(res.data)
-
-                //loop through list
-                //change int back to double
-                //return new list
             })
             .catch(err => {
                 dispatch({ type: FETCH_DONATIONS_FAIL, payload: err })

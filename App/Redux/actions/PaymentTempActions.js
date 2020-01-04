@@ -14,11 +14,6 @@ export const fetchPayments = () => {
             .then(res => {
                 dispatch({ type: FETCH_PAYMENTS_SUCCESS, payload: res.data })
                 console.log(res.data)
-
-                //loop through list
-                //change int back to double
-                //Sort categories together in one object
-                //return 
             })
             .catch(err => {
                 dispatch({ type: FETCH_PAYMENTS_FAIL, payload: err })

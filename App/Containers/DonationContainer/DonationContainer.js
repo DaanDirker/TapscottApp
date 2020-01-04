@@ -30,7 +30,7 @@ class DonationContainer extends Component {
     await this.props.fetchPayment(amount + ".00", name)
 
     //Testing code part for Sum number of donations
-    await this.props.fetchSumDonations()
+    await this.props.fetchDonations()
       .then((response) => console.log(response))
       .catch(err => {
         console.log('ERROR', err)
