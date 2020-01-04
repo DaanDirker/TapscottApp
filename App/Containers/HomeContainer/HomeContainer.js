@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { View, ScrollView, Dimensions, Text } from 'react-native'
 import ScaledImage from '../../Components/ScaledImage'
 import DonationContainer from "../DonationContainer/DonationContainer"
@@ -9,11 +10,12 @@ import styles from './HomeContainerStyles'
 
 const screenWidth = Math.round(Dimensions.get('window').width)
 
-export default class HomeContainer extends Component {
+class HomeContainer extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
+      donationAmount = 0
     }
   }
 
@@ -44,7 +46,7 @@ export default class HomeContainer extends Component {
                 <Text style={styles.subtitle}>Save the ocean through Blockchain!</Text>
               </View>
               <View style={styles.totalAmountContainer}>
-                <Text id="SumDonations" style={styles.heading}>$21.680</Text>
+                <Text id="SumDonations" style={styles.heading}>$21.680 {this.props.totalSum}</Text>
                 <Text style={styles.subtitle}>Raised since January 1999</Text>
               </View>
               <View style={{ flex: 1, justifyContent: 'flex-end', alignSelf: 'center', marginBottom: 1080 }}>
@@ -72,6 +74,7 @@ export default class HomeContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    totalSum: state.sum.totalSum
   }
 }
 

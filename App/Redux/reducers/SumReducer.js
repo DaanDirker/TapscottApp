@@ -11,7 +11,8 @@ const initialState = {
     isFetching: false,
     hasFailed: false,
     errorMessage: null,
-    data: {}
+    data: {},
+    totalSum: 0
 }
 
 export default function (state = initialState, action) {
@@ -28,7 +29,8 @@ export default function (state = initialState, action) {
                 isFetching: false,
                 hasFailed: false,
                 errorMessage: null,
-                data: action.payload
+                data: action.payload,
+                totalSum = action.payload
             })
         case FETCH_SUM_DONATION_FAIL:
             return Object.assign({}, state, {
