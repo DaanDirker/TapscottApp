@@ -16,7 +16,7 @@ export const fetchPayment = (amount, name) => {
   return dispatch => {
     dispatch({ type: FETCH_PAYMENT_CHECKOUT })
 
-    return axios.post(apiBaseUrl + '/payment/' + amount + "/" + name)
+    return axios.post(apiBaseUrl + '/payment/mollie/' + amount + "/" + name)
       .then(res => {
         dispatch({ type: FETCH_PAYMENT_CHECKOUT_SUCCESS, payload: res.data })
         console.log(res.data)
@@ -31,7 +31,7 @@ export const fetchPaymentObject = () => {
   return dispatch => {
     dispatch({ type: FETCH_PAYMENT_OBJECT })
 
-    return axios.get(apiBaseUrl + '/transaction/payments')
+    return axios.get(apiBaseUrl + '/payment/collection')
       .then(res => {
         dispatch({ type: FETCH_PAYMENT_OBJECT_SUCCESS, payload: res.data })
         console.log(res.data)
@@ -46,7 +46,7 @@ export const fetchLatestPayments = () => {
   return dispatch => {
     dispatch({ type: FETCH_LATEST_PAYMENTS })
 
-    return axios.get(apiBaseUrl + '/transaction/payments/latest')
+    return axios.get(apiBaseUrl + '/payment/latest')
       .then(res => {
         dispatch({ type: FETCH_LATEST_PAYMENTS_SUCCESS, payload: res.data })
         console.log(res.data)

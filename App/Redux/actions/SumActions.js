@@ -13,7 +13,7 @@ export const fetchSumDonations = () => {
   return dispatch => {
     dispatch({ type: FETCH_SUM_DONATION })
 
-    return axios.get(apiBaseUrl + '/sum/donation')
+    return axios.get(apiBaseUrl + '/donation/sum')
       .then(res => {
         dispatch({ type: FETCH_SUM_DONATION_SUCCESS, payload: res.data })
         console.log(res.data)
@@ -28,7 +28,7 @@ export const fetchSumPayments = () => {
   return dispatch => {
     dispatch({ type: FETCH_SUM_PAYMENT })
 
-    return axios.get(apiBaseUrl + '/sum/payment')
+    return axios.get(apiBaseUrl + '/payment/sum')
       .then(res => {
         dispatch({ type: FETCH_SUM_PAYMENT_SUCCESS, payload: res.data })
         console.log(res.data)
