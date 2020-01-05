@@ -7,9 +7,6 @@ import {
   fetchPaymentObject,
   fetchLatestPayments
 } from '../../Redux/actions/PaymentActions'
-import { fetchAllDonations } from '../../Redux/actions/DonationActions'
-import { fetchLatestDonations } from '../../Redux/actions/DonationActions'
-import { fetchSumDonations } from '../../Redux/actions/SumActions'
 
 import {
   setDonationAmount,
@@ -33,9 +30,6 @@ class DonationContainer extends Component {
 
   async handleCheckout(amount, name) {
     await this.props.fetchPayment(amount + ".00", name)
-
-    //Testing code part for Sum number of donations
-    // await this.props.fetchLatestPayments()
 
     if (this.props.payment.data.checkoutUrl) {
 
@@ -131,9 +125,9 @@ class DonationContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    donationName: state.donation.name,
-    donationAmount: state.donation.amount,
-    isCustom: state.donation.custom,
+    donationName: state.donationValue.name,
+    donationAmount: state.donationValue.amount,
+    isCustom: state.donationValue.custom,
     payment: state.payment
   }
 }
@@ -144,11 +138,8 @@ const mapDispatchToProps = (dispatch) => {
     setDonationCustom: (custom) => dispatch(setDonationCustom(custom)),
     setDonationName: (name) => dispatch(setDonationName(name)),
     fetchPayment: (amount, name) => dispatch(fetchPayment(amount, name)),
-    fetchAllDonations: () => dispatch(fetchAllDonations()),
     fetchPaymentObject: () => dispatch(fetchPaymentObject()),
-    fetchSumDonations: () => dispatch(fetchSumDonations()),
-    fetchLatestPayments: () => dispatch(fetchLatestPayments()),
-    fetchLatestDonations: () => dispatch(fetchLatestDonations())
+    fetchLatestPayments: () => dispatch(fetchLatestPayments())
   }
 }
 
