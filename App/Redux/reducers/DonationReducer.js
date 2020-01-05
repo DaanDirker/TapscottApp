@@ -1,43 +1,64 @@
 import {
-  SET_DONATION, 
-  SET_DONATION_NAME, 
-  SET_DONATION_AMOUNT,
-  SET_DONATION_CUSTOM
+  FETCH_DONATIONS,
+  FETCH_DONATIONS_SUCCESS,
+  FETCH_DONATIONS_FAIL,
+  FETCH_LATEST_DONATIONS,
+  FETCH_LATEST_DONATIONS_SUCCESS,
+  FETCH_LATEST_DONATIONS_FAIL,
 } from '../actions/ActionTypes'
-  
+
 const initialState = {
-  name: 'Anonymous',
-  amount: 1,
-  custom: false
+  isFetching: false,
+  hasFailed: false,
+  errorMessage: null,
+  data: {}
 }
-  
-export default (state = initialState, action) => {
-  switch(action.type) {
-    case SET_DONATION:
-      return {
-        ...state,
-        name: action.payload.name,          
-        amount: action.payload.amount,
-        custom: action.payload.custom
-      }
-    case SET_DONATION_NAME:
-      return {
-        ...state,
-        name: action.payload.name
-      }
-    case SET_DONATION_AMOUNT:
-      return {
-        ...state,
-        amount: action.payload.amount,
-        custom: action.payload.custom
-      }
-    case SET_DONATION_CUSTOM:
-      return {
-        ...state,
-        custom: action.payload.custom
-      }
+
+export default function (state = initialState, action) {
+  switch (action.type) {
+    case FETCH_DONATIONS:
+      return Object.assign({}, state, {
+        isFetching: true,
+        hasFailed: false,
+        errorMessage: null,
+        data: null
+      })
+    case FETCH_DONATIONS_SUCCESS:
+      return Object.assign({}, state, {
+        isFetching: false,
+        hasFailed: false,
+        errorMessage: null,
+        data: action.payload
+      })
+    case FETCH_DONATIONS_FAIL:
+      return Object.assign({}, state, {
+        isFetching: false,
+        hasFailed: true,
+        errorMessage: action.err,
+        data: action.payload
+      })
+    case FETCH_LATEST_DONATIONS:
+      return Object.assign({}, state, {
+        isFetching: true,
+        hasFailed: false,
+        errorMessage: null,
+        data: null
+      })
+    case FETCH_LATEST_DONATIONS_SUCCESS:
+      return Object.assign({}, state, {
+        isFetching: false,
+        hasFailed: false,
+        errorMessage: null,
+        data: action.payload
+      })
+    case FETCH_LATEST_DONATIONS_FAIL:
+      return Object.assign({}, state, {
+        isFetching: false,
+        hasFailed: true,
+        errorMessage: action.err,
+        data: action.payload
+      })
     default:
       return state
   }
-}
-  
+} 

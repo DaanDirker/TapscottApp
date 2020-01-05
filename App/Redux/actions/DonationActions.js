@@ -1,53 +1,41 @@
-import { 
-  SET_DONATION, 
-  SET_DONATION_AMOUNT, 
-  SET_DONATION_NAME,
-  SET_DONATION_CUSTOM
+import axios from 'axios'
+import { apiBaseUrl } from '../../Utils/Constants'
+import {
+    FETCH_DONATIONS,
+    FETCH_DONATIONS_SUCCESS,
+    FETCH_DONATIONS_FAIL,
+    FETCH_LATEST_DONATIONS,
+    FETCH_LATEST_DONATIONS_SUCCESS,
+    FETCH_LATEST_DONATIONS_FAIL,
 } from './ActionTypes'
 
-export const setDonation = (inputAmount, inputName, isCustom) => {
-  return dispatch => {
-    dispatch({
-      type: SET_DONATION,
-      payload: {
-        name: inputName,
-        amount: inputAmount,
-        custom: isCustom
-      }
-    }) 
-  }
+export const fetchAllDonations = () => {
+    return dispatch => {
+        dispatch({ type: FETCH_DONATIONS })
+
+        return axios.get(apiBaseUrl + '/transaction/donations')
+            .then(res => {
+                dispatch({ type: FETCH_DONATIONS_SUCCESS, payload: res.data })
+                console.log(res.data)
+            })
+            .catch(err => {
+                dispatch({ type: FETCH_DONATIONS_FAIL, payload: err })
+            })
+    }
 }
 
-export const setDonationAmount = (inputAmount, isCustom) => {
-  return dispatch => {
-    dispatch({
-      type: SET_DONATION_AMOUNT,
-      payload: {
-        amount: inputAmount,
-        custom: isCustom
-      }
-    })
-  }
+export const fetchLatestDonations = () => {
+    return dispatch => {
+        dispatch({ type: FETCH_LATEST_DONATIONS })
+
+        return axios.get(apiBaseUrl + '/transaction/donations')
+            .then(res => {
+                dispatch({ type: FETCH_LATEST_DONATIONS_SUCCESS, payload: res.data })
+                console.log(res.data)
+            })
+            .catch(err => {
+                dispatch({ type: FETCH_LATEST_DONATIONS_FAIL, payload: err })
+            })
+    }
 }
 
-export const setDonationName = (nameInput) => {
-  return dispatch => {
-    dispatch({
-      type: SET_DONATION_NAME,
-      payload: {
-        name: nameInput
-      }
-    })
-  }
-}
-
-export const setDonationCustom = (customInput) => {
-  return dispatch => {
-    dispatch({
-      type: SET_DONATION_CUSTOM,
-      payload: {
-        custom: customInput
-      }
-    })
-  }
-}

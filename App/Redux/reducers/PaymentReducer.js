@@ -2,6 +2,12 @@ import {
   FETCH_PAYMENT_CHECKOUT,
   FETCH_PAYMENT_CHECKOUT_SUCCESS,
   FETCH_PAYMENT_CHECKOUT_FAIL,
+  FETCH_PAYMENTS,
+  FETCH_PAYMENTS_SUCCESS,
+  FETCH_PAYMENTS_FAIL,
+  FETCH_LATEST_PAYMENTS,
+  FETCH_LATEST_PAYMENTS_SUCCESS,
+  FETCH_LATEST_PAYMENTS_FAIL,
 } from '../actions/ActionTypes'
 
 const initialState = {
@@ -12,7 +18,7 @@ const initialState = {
 }
 
 export default function (state = initialState, action) {
-  switch(action.type) {
+  switch (action.type) {
     case FETCH_PAYMENT_CHECKOUT:
       return Object.assign({}, state, {
         isFetching: true,
@@ -28,6 +34,48 @@ export default function (state = initialState, action) {
         data: action.payload
       })
     case FETCH_PAYMENT_CHECKOUT_FAIL:
+      return Object.assign({}, state, {
+        isFetching: false,
+        hasFailed: true,
+        errorMessage: action.err,
+        data: action.payload
+      })
+    case FETCH_PAYMENTS:
+      return Object.assign({}, state, {
+        isFetching: true,
+        hasFailed: false,
+        errorMessage: null,
+        data: null
+      })
+    case FETCH_PAYMENTS_SUCCESS:
+      return Object.assign({}, state, {
+        isFetching: false,
+        hasFailed: false,
+        errorMessage: null,
+        data: action.payload
+      })
+    case FETCH_PAYMENTS_FAIL:
+      return Object.assign({}, state, {
+        isFetching: false,
+        hasFailed: true,
+        errorMessage: action.err,
+        data: action.payload
+      })
+    case FETCH_LATEST_PAYMENTS:
+      return Object.assign({}, state, {
+        isFetching: true,
+        hasFailed: false,
+        errorMessage: null,
+        data: null
+      })
+    case FETCH_LATEST_PAYMENTS_SUCCESS:
+      return Object.assign({}, state, {
+        isFetching: false,
+        hasFailed: false,
+        errorMessage: null,
+        data: action.payload
+      })
+    case FETCH_LATEST_PAYMENTS_FAIL:
       return Object.assign({}, state, {
         isFetching: false,
         hasFailed: true,

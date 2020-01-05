@@ -2,15 +2,20 @@ import React, { Component } from "react"
 import LoadingSpinner from "../../Components/LoadingSpinner/LoadingSpinner"
 import { View, Text } from "react-native"
 import { connect } from 'react-redux'
-import { fetchPayment } from '../../Redux/actions/PaymentActions'
-import { fetchDonations } from '../../Redux/actions/DonationTempActions'
-import { fetchPayments } from '../../Redux/actions/PaymentTempActions'
+import {
+  fetchPayment,
+  fetchPaymentObject,
+  fetchLatestPayments
+} from '../../Redux/actions/PaymentActions'
+import { fetchAllDonations } from '../../Redux/actions/DonationActions'
+import { fetchLatestDonations } from '../../Redux/actions/DonationActions'
 import { fetchSumDonations } from '../../Redux/actions/SumActions'
+
 import {
   setDonationAmount,
   setDonationName,
   setDonationCustom
-} from '../../Redux/actions/DonationActions'
+} from '../../Redux/actions/DonationValueActions'
 
 import RoundedButton from "../../Components/RoundedButton/RoundedButton"
 import InputField from "../../Components/InputField/InputField"
@@ -30,11 +35,7 @@ class DonationContainer extends Component {
     await this.props.fetchPayment(amount + ".00", name)
 
     //Testing code part for Sum number of donations
-    await this.props.fetchDonations()
-      .then((response) => console.log(response))
-      .catch(err => {
-        console.log('ERROR', err)
-      });
+    // await this.props.fetchLatestPayments()
 
     if (this.props.payment.data.checkoutUrl) {
 
@@ -143,9 +144,11 @@ const mapDispatchToProps = (dispatch) => {
     setDonationCustom: (custom) => dispatch(setDonationCustom(custom)),
     setDonationName: (name) => dispatch(setDonationName(name)),
     fetchPayment: (amount, name) => dispatch(fetchPayment(amount, name)),
-    fetchDonations: () => dispatch(fetchDonations()),
-    fetchPayments: () => dispatch(fetchPayments()),
-    fetchSumDonations: () => dispatch(fetchSumDonations())
+    fetchAllDonations: () => dispatch(fetchAllDonations()),
+    fetchPaymentObject: () => dispatch(fetchPaymentObject()),
+    fetchSumDonations: () => dispatch(fetchSumDonations()),
+    fetchLatestPayments: () => dispatch(fetchLatestPayments()),
+    fetchLatestDonations: () => dispatch(fetchLatestDonations())
   }
 }
 
