@@ -9,6 +9,7 @@ import AchievementsContainer from '../AchievementsContainer/AchievementsContaine
 
 import ScaledImage from '../../Components/ScaledImage'
 import BoeiButton from '../../Components/BoeiButton/BoeiButton'
+import BottomNavigation from "../../Components/BottomNavigation/BottomNavigation"
 
 import styles from './HomeContainerStyles'
 
@@ -60,7 +61,7 @@ class HomeContainer extends Component {
           <ScaledImage
             source={require('../../Assets/images/Sea.png')}
             width={screenWidth} />
-          {/* <Waves /> */}
+          {/* <Waves here /> */}
         </View>
 
         <View style={styles.sandContainer}>
@@ -68,12 +69,10 @@ class HomeContainer extends Component {
             {this.handleBottomNav()}
           </View>
           <View>
-            <Button 
-              title='Donations'
-              onPress={() => this.navigateTo(BOTTOM_NAV_DONATION)}/>
-            <Button 
-              title='Achievements'
-              onPress={() => this.navigateTo(BOTTOM_NAV_ACHIEVEMENTS)}/>
+            <BottomNavigation 
+              currentNav={this.props.currentNav}
+              onPressDonate={() => this.navigateTo(BOTTOM_NAV_DONATION)}
+              onPressAchievements={() => this.navigateTo(BOTTOM_NAV_ACHIEVEMENTS)}/>
           </View>
         </View>
       </ScrollView>

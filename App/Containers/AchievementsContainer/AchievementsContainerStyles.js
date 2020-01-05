@@ -22,7 +22,7 @@ export default StyleSheet.create({
   },
   aboutContainer: {
     flex: 1,
-    maxWidth: 300,
+    maxWidth: 350,
     marginBottom: 48,
     alignItems: 'center'
   },
