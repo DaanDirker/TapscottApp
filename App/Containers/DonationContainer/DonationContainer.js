@@ -2,11 +2,15 @@ import React, { Component } from "react"
 import LoadingSpinner from "../../Components/LoadingSpinner/LoadingSpinner"
 import { View, Text } from "react-native"
 import { connect } from 'react-redux'
-import { fetchPayment } from '../../Redux/actions/PaymentActions'
-import { 
-  setDonationAmount, 
-  setDonationName, 
-  setDonationCustom } from '../../Redux/actions/DonationActions'
+import {
+  fetchPayment
+} from '../../Redux/actions/PaymentActions'
+
+import {
+  setDonationAmount,
+  setDonationName,
+  setDonationCustom
+} from '../../Redux/actions/DonationValueActions'
 
 import RoundedButton from "../../Components/RoundedButton/RoundedButton"
 import InputField from "../../Components/InputField/InputField"
@@ -26,6 +30,7 @@ class DonationContainer extends Component {
     await this.props.fetchPayment(amount + ".00", name)
 
     if (this.props.payment.data.checkoutUrl) {
+
       const { navigate } = this.props.navigation
       navigate("Webview")
     }
@@ -33,7 +38,7 @@ class DonationContainer extends Component {
 
   renderSpinner() {
     if (this.props.payment.isFetching) {
-      return <LoadingSpinner/>
+      return <LoadingSpinner />
     }
   }
 
@@ -50,62 +55,62 @@ class DonationContainer extends Component {
 
   render() {
     return (
-      <View style={{flex: 1, maxWidth: 340}}>
-        <View style={{alignItems: 'center', marginBottom: 34}}>
+      <View style={{ flex: 1, maxWidth: 340 }}>
+        <View style={{ alignItems: 'center', marginBottom: 34 }}>
           <Text style={styles.donationHeading}>Save the ocean now!</Text>
           <Text style={styles.donationSubtitle}>Every dollar counts</Text>
         </View>
         <View style={styles.row}>
           {/* First Row */}
           <View style={styles.buttonContainer}>
-            <RoundedButton amount="1" currency="$" 
+            <RoundedButton amount="1" currency="$"
               style={[this.isSelected(1) ? styles.selectedItem : null, styles.baseMargin]}
               textStyle={this.isSelected(1) ? styles.selectedText : null}
-              onPress={() => this.props.setDonationAmount(1, false)}/>
+              onPress={() => this.props.setDonationAmount(1, false)} />
           </View>
           <View style={styles.buttonContainer}>
-            <RoundedButton amount="5" currency="$" 
+            <RoundedButton amount="5" currency="$"
               style={[this.isSelected(5) ? styles.selectedItem : null, styles.baseMargin]}
               textStyle={this.isSelected(5) ? styles.selectedText : null}
-              onPress={() => this.props.setDonationAmount(5, false)}/>
+              onPress={() => this.props.setDonationAmount(5, false)} />
           </View>
           <View style={styles.buttonContainer}>
-            <RoundedButton amount="10" currency="$" 
+            <RoundedButton amount="10" currency="$"
               style={this.isSelected(10) ? styles.selectedItem : null}
               textStyle={this.isSelected(10) ? styles.selectedText : null}
-              onPress={() => this.props.setDonationAmount(10, false)}/>
+              onPress={() => this.props.setDonationAmount(10, false)} />
           </View>
         </View>
         <View style={styles.row}>
           {/* Second Row */}
           <View style={styles.buttonContainer}>
-            <RoundedButton amount="20" currency="$" 
+            <RoundedButton amount="20" currency="$"
               style={[this.isSelected(20) ? styles.selectedItem : null, styles.baseMargin]}
               textStyle={this.isSelected(20) ? styles.selectedText : null}
-              onPress={() => this.props.setDonationAmount(20, false)}/>
+              onPress={() => this.props.setDonationAmount(20, false)} />
           </View>
-          <View style={{flex: 2}}>
-            <InputField 
+          <View style={{ flex: 2 }}>
+            <InputField
               placeholder="Other amount"
               backgroundStyles={this.props.isCustom ? styles.selectedItem : null}
               inputStyles={this.props.isCustom ? styles.selectedText : null}
               type="numeric"
               onFocus={() => this.props.setDonationAmount(this.state.customAmount, true)}
-              onChangeText={(amount) => this.setCustomAmount(amount)}/>
+              onChangeText={(amount) => this.setCustomAmount(amount)} />
           </View>
         </View>
         <View style={styles.row}>
           {/* Third Row */}
-          <View style={{flex: 1}}>
-            <InputField 
+          <View style={{ flex: 1 }}>
+            <InputField
               placeholder="Enter your name"
-              onChangeText={(name) => this.props.setDonationName(name)}/>
+              onChangeText={(name) => this.props.setDonationName(name)} />
           </View>
         </View>
         <View style={styles.row}>
-          <View style={{flex: 1, alignItems: 'flex-end'}}>
-            <RoundedButton amount="Donate" currency="" style={styles.donateButton} textStyle={{color: '#FFFFFF'}}
-              onPress={() => this.handleCheckout(this.props.donationAmount, this.props.donationName)}/>
+          <View style={{ flex: 1, alignItems: 'flex-end' }}>
+            <RoundedButton amount="Donate" currency="" style={styles.donateButton} textStyle={{ color: '#FFFFFF' }}
+              onPress={() => this.handleCheckout(this.props.donationAmount, this.props.donationName)} />
           </View>
         </View>
         <View style={styles.loading}>
@@ -118,9 +123,9 @@ class DonationContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    donationName: state.donation.name,
-    donationAmount: state.donation.amount,
-    isCustom: state.donation.custom,
+    donationName: state.donationValue.name,
+    donationAmount: state.donationValue.amount,
+    isCustom: state.donationValue.custom,
     payment: state.payment
   }
 }
@@ -130,7 +135,7 @@ const mapDispatchToProps = (dispatch) => {
     setDonationAmount: (amount, custom) => dispatch(setDonationAmount(amount, custom)),
     setDonationCustom: (custom) => dispatch(setDonationCustom(custom)),
     setDonationName: (name) => dispatch(setDonationName(name)),
-    fetchPayment: (amount, name) => dispatch(fetchPayment(amount,name))
+    fetchPayment: (amount, name) => dispatch(fetchPayment(amount, name))
   }
 }
 
