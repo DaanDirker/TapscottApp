@@ -3,9 +3,7 @@ import LoadingSpinner from "../../Components/LoadingSpinner/LoadingSpinner"
 import { View, Text } from "react-native"
 import { connect } from 'react-redux'
 import {
-  fetchPayment,
-  fetchPaymentObject,
-  fetchLatestPayments
+  fetchPayment
 } from '../../Redux/actions/PaymentActions'
 
 import {
@@ -137,9 +135,7 @@ const mapDispatchToProps = (dispatch) => {
     setDonationAmount: (amount, custom) => dispatch(setDonationAmount(amount, custom)),
     setDonationCustom: (custom) => dispatch(setDonationCustom(custom)),
     setDonationName: (name) => dispatch(setDonationName(name)),
-    fetchPayment: (amount, name) => dispatch(fetchPayment(amount, name)),
-    fetchPaymentObject: () => dispatch(fetchPaymentObject()),
-    fetchLatestPayments: () => dispatch(fetchLatestPayments())
+    fetchPayment: (amount, name) => dispatch(fetchPayment(amount, name))
   }
 }
 
