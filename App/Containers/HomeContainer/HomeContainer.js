@@ -58,7 +58,7 @@ class HomeContainer extends Component {
                 <Text id="SumDonations" style={styles.heading}>${this.props.totalSum}</Text>
                 <Text style={styles.subtitle}>Raised since January 1999</Text>
               </View>
-              <View style={{ flex: 1, justifyContent: 'flex-end', alignSelf: 'center', marginBottom: 1080 }}>
+              <View style={{ flex: 1, justifyContent: 'flex-end', alignSelf: 'center', marginBottom: 960 }}>
                 <BoeiButton style={styles.boeiButton} onPress={() => scrollToBottom()} />
               </View>
             </View>
