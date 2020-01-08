@@ -22,7 +22,6 @@ class AchievementsContainer extends Component {
   //TODO: Replace with better compacter code, temporary
   formatPayments(list) {
     formattedPayments = []
-    console.log('FORMATTING PAYMENTS')
 
     list.forEach((payment) => {
       switch (payment.sender) {
@@ -79,35 +78,6 @@ class AchievementsContainer extends Component {
     return formattedPayments
   }
 
-  //TODO: Switch to another Graph Pie package
-  //Quick fix to avoid error while all payment values are 0
-  renderGraph() {
-    let total = 0
-    for (let key in this.props.payments) {
-      total += this.props.payments[key]
-    }
-
-    if (total == 0) {
-      return (
-        <PaymentGraph
-          transportation={1}
-          labor={1}
-          fishingnets={1}
-          boatrental={1}
-          bank={1}
-        />
-      )
-    }
-    return (
-      <PaymentGraph
-        transportation={this.props.payments.transportation}
-        labor={this.props.payments.labor}
-        fishingnets={this.props.payments.fishingNets}
-        boatrental={this.props.payments.boatRental}
-        bank={this.props.payments.bank} />
-    )
-  }
-
   render() {
     return (
       <View style={styles.achievementsContainer}>
@@ -122,12 +92,17 @@ class AchievementsContainer extends Component {
         </View>
         <View style={styles.graphContainer}>
           <Text style={[styles.heading, styles.lHeadingMargin]}>Achievements</Text>
-          {/* {this.renderGraph()} */}
+          <PaymentGraph
+            transportation={this.props.payments.transport}
+            labor={this.props.payments.labor}
+            fishingnets={this.props.payments.fishingNets}
+            boatrental={this.props.payments.boatRental}
+            bank={this.props.payments.bank} />
         </View>
         <Text style={[styles.heading, styles.lHeadingMargin]}>Historical expenditures</Text>
         <View style={{ flex: 1, alignSelf: 'stretch' }}>
           <ScrollView style={styles.expendituresContainer} nestedScrollEnabled={true}>
-            <PaymentList payments={this.formatPayments(this.props.latestPayments)} />
+            <PaymentList payments={this.formatPayments(this.props.latestPayments)}/>
           </ScrollView>
         </View>
       </View>

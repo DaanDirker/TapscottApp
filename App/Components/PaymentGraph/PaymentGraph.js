@@ -42,8 +42,8 @@ export default class TransactionGraph extends Component {
         <View style={styles.graphContainer}>
           <PieChart
             chart_wh={300}
-            series={this.categories.map(payment => payment.value)}
-            sliceColor={this.categories.map(payment => payment.color)}
+            series={this.categories.filter(category => category.value > 0).map(payment => payment.value)}
+            sliceColor={this.categories.filter(category => category.value > 0).map(payment => payment.color)}
             doughnut={true}
             coverRadius={0.7}
             coverFill='#C7B299'
