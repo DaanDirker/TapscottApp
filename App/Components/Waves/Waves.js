@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { View, Dimensions, ImageBackground } from "react-native"
-import ScaledImage from '../Components/ScaledImage'
+import ScaledImage from '../Components/ScaledImage/ScaledImage'
 
 const screenWidth = Math.round(Dimensions.get('window').width)
 

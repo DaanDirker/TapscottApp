@@ -7,7 +7,7 @@ import { BOTTOM_NAV_ACHIEVEMENTS, BOTTOM_NAV_DONATION } from '../../Utils/Consta
 import DonationContainer from "../DonationContainer/DonationContainer"
 import AchievementsContainer from '../AchievementsContainer/AchievementsContainer'
 
-import ScaledImage from '../../Components/ScaledImage'
+import ScaledImage from '../../Components/ScaledImage/ScaledImage'
 import BoeiButton from '../../Components/BoeiButton/BoeiButton'
 import BottomNavigation from "../../Components/BottomNavigation/BottomNavigation"
 
@@ -40,7 +40,7 @@ class HomeContainer extends Component {
 
   render() {
     scrollToBottom = () => {
-      this.scrollView.scrollToEnd({ duration: 4000 })
+      this.scrollView.scrollToEnd({ duration: scrollSpeed })
     }
 
     return (
