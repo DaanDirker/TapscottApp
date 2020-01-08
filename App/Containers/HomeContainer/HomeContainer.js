@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, ScrollView, Dimensions, Text, Button } from 'react-native'
+import { View, ScrollView, Dimensions, Text } from 'react-native'
 import { connect } from 'react-redux'
 import { navigateTo } from '../../Redux/actions/BottomNavActions'
 import { BOTTOM_NAV_ACHIEVEMENTS, BOTTOM_NAV_DONATION } from '../../Utils/Constants'
@@ -11,12 +11,19 @@ import ScaledImage from '../../Components/ScaledImage'
 import BoeiButton from '../../Components/BoeiButton/BoeiButton'
 import BottomNavigation from "../../Components/BottomNavigation/BottomNavigation"
 
+import { fetchSumDonations } from '../../Redux/actions/SumActions'
+
 import styles from './HomeContainerStyles'
 
 const screenWidth = Math.round(Dimensions.get('window').width)
 const scrollSpeed = 4000
 
 class HomeContainer extends Component {
+
+  componentDidMount() {
+    //Fetch total donation amount
+    this.props.fetchSumDonations()
+  }
 
   handleBottomNav() {
     switch(this.props.currentNav) {
@@ -33,7 +40,7 @@ class HomeContainer extends Component {
 
   render() {
     scrollToBottom = () => {
-      this.scrollView.scrollToEnd({duration: scrollSpeed})
+      this.scrollView.scrollToEnd({ duration: 4000 })
     }
 
     return (
@@ -42,20 +49,20 @@ class HomeContainer extends Component {
           <ScaledImage
             source={require('../../Assets/images/Sky.png')}
             width={screenWidth}>
-              <View style={styles.skyContent}>
-                <View style={styles.headingContainer}>
-                  <Text style={[styles.heading, {marginBottom: 8}]}>TAPSCOTT</Text>
-                  <Text style={styles.subtitle}>Save the ocean through Blockchain!</Text>
-                </View>
-                <View style={styles.totalAmountContainer}>
-                  <Text style={styles.heading}>$21.680</Text>
-                  <Text style={styles.subtitle}>Raised since January 1999</Text>
-                </View>
-                <View style={{flex: 1, justifyContent: 'flex-end', alignSelf: 'center', marginBottom: 1080}}>
-                  <BoeiButton style={styles.boeiButton} onPress={() => scrollToBottom()}/>
-                </View>
+            <View style={styles.skyContent}>
+              <View style={styles.headingContainer}>
+                <Text style={[styles.heading, { marginBottom: 8 }]}>TAPSCOTT</Text>
+                <Text style={styles.subtitle}>Save the ocean through Blockchain!</Text>
               </View>
-            </ScaledImage>
+              <View style={styles.totalAmountContainer}>
+                <Text id="SumDonations" style={styles.heading}>${this.props.totalSum}</Text>
+                <Text style={styles.subtitle}>Raised since January 1999</Text>
+              </View>
+              <View style={{ flex: 1, justifyContent: 'flex-end', alignSelf: 'center', marginBottom: 1080 }}>
+                <BoeiButton style={styles.boeiButton} onPress={() => scrollToBottom()} />
+              </View>
+            </View>
+          </ScaledImage>
         </View>
         <View style={styles.seaContainer, styles.backgroundWaves}>
           <ScaledImage
@@ -82,12 +89,14 @@ class HomeContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    currentNav: state.bottomNav.currentBottomNav
+    currentNav: state.bottomNav.currentBottomNav,
+    totalSum: state.sum.totalSum
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    fetchSumDonations: () => dispatch(fetchSumDonations()),
     navigateTo: (nav) => dispatch(navigateTo(nav))
   }
 }
