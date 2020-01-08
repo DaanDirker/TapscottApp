@@ -1,15 +1,50 @@
 import React, { Component } from "react"
 import { View, Text } from "react-native"
 import { connect } from 'react-redux'
+import { ScrollView } from "react-native-gesture-handler";
 import PaymentGraph from '../../Components/PaymentGraph/PaymentGraph'
+import { fetchPaymentObject } from "../../Redux/actions/PaymentActions";
 
 //TODO: REMOVE
 import PaymentBox from "../../Components/PaymentBox/PaymentBox";
 
 import styles from './AchievementsContainerStyles'
-import { ScrollView } from "react-native-gesture-handler";
+
 
 class AchievementsContainer extends Component {
+
+  componentDidMount() {
+    this.props.fetchPayments()
+  }
+
+  //TODO: Switch to another Graph Pie package
+  //Quick fix to avoid error while all payment values are 0
+  renderGraph() {
+    let total = 0
+    for (let key in this.props.payments) {
+      total += this.props.payments[key]
+    }
+    
+    if (total == 0) {
+      return (
+        <PaymentGraph
+          transportation={1}
+          labor={1}
+          fishingnets={1}
+          boatrental={1}
+          bank={1}
+        />
+      )
+    }
+    return (
+      <PaymentGraph
+        transportation={this.props.payments.transportation}
+        labor={this.props.payments.labor}
+        fishingnets={this.props.payments.fishingNets}
+        boatrental={this.props.payments.boatRental}
+        bank={this.props.payments.bank}/>
+    )
+  }
 
   render() {
     return (
@@ -25,12 +60,7 @@ class AchievementsContainer extends Component {
         </View>
         <View style={styles.graphContainer}>
           <Text style={[styles.heading, styles.lHeadingMargin]}>Achievements</Text>
-          <PaymentGraph
-            transportation={756}
-            labor={420}
-            fishingnets={66}
-            boatrental={120}
-            bank={344}/>
+          {this.renderGraph()}
         </View>
         <Text style={[styles.heading, styles.lHeadingMargin]}>Historical expenditures</Text>
         <View style={{flex: 1, alignSelf: 'stretch'}}>
@@ -53,12 +83,14 @@ class AchievementsContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    payments: state.payment.payments
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    fetchPayments: () => dispatch(fetchPaymentObject())
   }
 }
 
-export default connect()(AchievementsContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(AchievementsContainer)
