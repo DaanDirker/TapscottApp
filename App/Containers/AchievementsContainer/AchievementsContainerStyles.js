@@ -16,6 +16,9 @@ export default StyleSheet.create({
   headingMargin: {
     marginBottom: 8
   },
+  lHeadingMargin: {
+    marginBottom: 32
+  },
   achievementsContainer: {
     flex: 1,
     alignItems: 'center'
@@ -27,10 +30,21 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   graphContainer: {
+    height: 'auto',
     marginHorizontal: 48,
+    marginBottom: 16,
     alignItems: 'center',
   },
   graphDetailContainer: {
     justifyContent: 'flex-start',
+  },
+  expendituresContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    height: 400,
+    marginHorizontal: 48,
+  },
+  scrollChild: {
+    marginBottom: 16
   }
 })
