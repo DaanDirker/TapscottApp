@@ -34,7 +34,6 @@ export default function (state = initialState, action) {
         isFetching: true,
         hasFailed: false,
         errorMessage: null,
-        data: null
       })
     case FETCH_PAYMENT_CHECKOUT_SUCCESS:
       return Object.assign({}, state, {
@@ -55,7 +54,6 @@ export default function (state = initialState, action) {
         isFetching: true,
         hasFailed: false,
         errorMessage: null,
-        data: null
       })
     case FETCH_PAYMENTS_SUCCESS:
       return Object.assign({}, state, {
@@ -76,7 +74,6 @@ export default function (state = initialState, action) {
         isFetching: true,
         hasFailed: false,
         errorMessage: null,
-        data: null
       })
     case FETCH_LATEST_PAYMENTS_SUCCESS:
       return Object.assign({}, state, {
@@ -108,7 +105,7 @@ export default function (state = initialState, action) {
           labor: action.payload.labor,
           fishingNets: action.payload.fishingNets,
           boatRental: action.payload.boatRental,
-          bank: action.payload.bank,
+          bank: action.payload.bank
         }
       })
     case FETCH_PAYMENT_OBJECT_FAIL:

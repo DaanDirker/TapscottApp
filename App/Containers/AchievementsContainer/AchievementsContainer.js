@@ -76,7 +76,6 @@ class AchievementsContainer extends Component {
           break
       }
     })
-    console.log(formattedPayments)
     return formattedPayments
   }
 
@@ -128,7 +127,7 @@ class AchievementsContainer extends Component {
         <Text style={[styles.heading, styles.lHeadingMargin]}>Historical expenditures</Text>
         <View style={{flex: 1, alignSelf: 'stretch'}}>
           <ScrollView style={styles.expendituresContainer} nestedScrollEnabled={true}>
-            <PaymentList payments={this.formatPayments(this.props.latestPayments)}/>
+            {/* <PaymentList payments={this.formatPayments(this.props.latestPayments)}/> */}
           </ScrollView>
         </View>
       </View>
