@@ -3,10 +3,11 @@ import { View, Text } from "react-native"
 import { connect } from 'react-redux'
 import { ScrollView } from "react-native-gesture-handler";
 import PaymentGraph from '../../Components/PaymentGraph/PaymentGraph'
-import { fetchPaymentObject } from "../../Redux/actions/PaymentActions";
+import PaymentList from '../../Components/PaymentList/PaymentList'
+import { fetchPaymentObject, fetchLatestPayments } from "../../Redux/actions/PaymentActions";
 
-//TODO: REMOVE
-import PaymentBox from "../../Components/PaymentBox/PaymentBox";
+import { IBAN_CATEGORIES } from '../../Utils/Constants'
+import PieColors from '../../Utils/Constants'
 
 import styles from './AchievementsContainerStyles'
 
@@ -15,6 +16,68 @@ class AchievementsContainer extends Component {
 
   componentDidMount() {
     this.props.fetchPayments()
+    this.props.fetchLatestPayments()
+  }
+
+  //TODO: Replace with better compacter code, temporary
+  formatPayments(list) {
+    formattedPayments = []
+    console.log('FORMATTING PAYMENTS')
+
+    list.forEach((payment) => {
+      switch(payment.sender) {
+        case IBAN_CATEGORIES.IBAN1_TRANSPORT:
+          formattedPayments.push({
+            color: PieColors.transport,
+            title: 'Transport',
+            amount: payment.amount,
+            timestamp: payment.timestamp
+          })
+          break
+        case IBAN_CATEGORIES.IBAN2_LABOR:
+          formattedPayments.push({
+            color: PieColors.labor,
+            title: 'Labor',
+            amount: payment.amount,
+            timestamp: payment.timestamp
+          })
+          break
+        case IBAN_CATEGORIES.IBAN3_FISHING_NETS:
+          formattedPayments.push({
+            color: PieColors.fishingNets,
+            title: 'Fishing Nets',
+            amount: payment.amount,
+            timestamp: payment.timestamp
+          })
+          break
+        case IBAN_CATEGORIES.IBAN4_BOAT_RENTAL:
+          formattedPayments.push({
+            color: PieColors.boatRental,
+            title: 'Boat Rental',
+            amount: payment.amount,
+            timestamp: payment.timestamp
+          })
+          break
+        case IBAN_CATEGORIES.IBAN5_BANK: 
+          formattedPayments.push({
+            color: PieColors.bank,
+            title: 'Bank',
+            amount: payment.amount,
+            timestamp: payment.timestamp
+          })
+          break
+        default: 
+          formattedPayments.push({
+            color: '#FFFFFF',
+            title: 'Unknown',
+            amount: payment.amount,
+            timestamp: payment.timestamp
+          })
+          break
+      }
+    })
+    console.log(formattedPayments)
+    return formattedPayments
   }
 
   //TODO: Switch to another Graph Pie package
@@ -65,15 +128,7 @@ class AchievementsContainer extends Component {
         <Text style={[styles.heading, styles.lHeadingMargin]}>Historical expenditures</Text>
         <View style={{flex: 1, alignSelf: 'stretch'}}>
           <ScrollView style={styles.expendituresContainer} nestedScrollEnabled={true}>
-            <PaymentBox paymentStyle={styles.scrollChild} title='Transportation' date='24/09/2019 55:6:22' amount='20$' lineColor='#39C181'/>
-            <PaymentBox paymentStyle={styles.scrollChild} title='Labor' date='24/09/2019 55:6:22' amount='400$' lineColor='#39C181'/>
-            <PaymentBox paymentStyle={styles.scrollChild} title='Transportation' date='24/09/2019 55:6:22' amount='20$' lineColor='#39C181'/>
-            <PaymentBox paymentStyle={styles.scrollChild} title='Transportation' date='24/09/2019 55:6:22' amount='20$' lineColor='#39C181'/>
-            <PaymentBox paymentStyle={styles.scrollChild} title='Transportation' date='24/09/2019 55:6:22' amount='20$' lineColor='#39C181'/>
-            <PaymentBox paymentStyle={styles.scrollChild} title='Transportation' date='24/09/2019 55:6:22' amount='20$' lineColor='#39C181'/>
-            <PaymentBox paymentStyle={styles.scrollChild} title='Transportation' date='24/09/2019 55:6:22' amount='20$' lineColor='#39C181'/>
-            <PaymentBox paymentStyle={styles.scrollChild} title='Transportation' date='24/09/2019 55:6:22' amount='20$' lineColor='#39C181'/>
-            <PaymentBox paymentStyle={styles.scrollChild} title='Transportation' date='24/09/2019 55:6:22' amount='20$' lineColor='#39C181'/>
+            <PaymentList payments={this.formatPayments(this.props.latestPayments)}/>
           </ScrollView>
         </View>
       </View>
@@ -83,13 +138,15 @@ class AchievementsContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    payments: state.payment.payments
+    payments: state.payment.payments,
+    latestPayments: state.payment.data
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchPayments: () => dispatch(fetchPaymentObject())
+    fetchPayments: () => dispatch(fetchPaymentObject()),
+    fetchLatestPayments: () => dispatch(fetchLatestPayments())
   }
 }
 

@@ -17,7 +17,7 @@ const initialState = {
   isFetching: false,
   hasFailed: false,
   errorMessage: null,
-  data: {},
+  data: [],
   payments: {
     transport: 0,
     labor: 0,

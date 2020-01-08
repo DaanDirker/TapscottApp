@@ -12,6 +12,7 @@ export default StyleSheet.create({
     height: 60
   },
   leftArea: {
+    flex: 3,
     margin: 8
   },
   rightArea: {
@@ -27,6 +28,7 @@ export default StyleSheet.create({
   },
   dateFont: {
     fontFamily: 'Bitter-Regular',
-    color: '#909090'
+    color: '#909090',
+    fontSize: 9
   }
 })

@@ -41,10 +41,7 @@ export default StyleSheet.create({
   expendituresContainer: {
     flex: 1,
     flexDirection: 'column',
-    height: 400,
+    maxHeight: 400,
     marginHorizontal: 48,
   },
-  scrollChild: {
-    marginBottom: 16
-  }
 })
