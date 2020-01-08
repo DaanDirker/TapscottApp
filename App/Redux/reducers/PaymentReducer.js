@@ -18,6 +18,7 @@ const initialState = {
   hasFailed: false,
   errorMessage: null,
   data: [],
+  checkout: [],
   payments: {
     transport: 0,
     labor: 0,
@@ -40,14 +41,14 @@ export default function (state = initialState, action) {
         isFetching: false,
         hasFailed: false,
         errorMessage: null,
-        data: action.payload
+        checkout: action.payload
       })
     case FETCH_PAYMENT_CHECKOUT_FAIL:
       return Object.assign({}, state, {
         isFetching: false,
         hasFailed: true,
         errorMessage: action.err,
-        data: action.payload
+        checkout: action.payload
       })
     case FETCH_PAYMENTS:
       return Object.assign({}, state, {

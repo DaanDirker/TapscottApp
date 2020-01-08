@@ -14,7 +14,7 @@ class WebviewContainer extends Component {
 
   render() {
     return (
-      <WebView source={{ uri: this.props.payment.checkoutUrl }}
+      <WebView source={{ uri: this.props.payment.checkout.checkoutUrl }}
         onNavigationStateChange={this._onNavigationStateChange.bind(this)}/>
     )
   }
@@ -22,7 +22,7 @@ class WebviewContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    payment: state.payment.data
+    payment: state.payment
   }
 }
 

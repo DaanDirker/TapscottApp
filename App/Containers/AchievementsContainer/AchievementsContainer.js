@@ -27,7 +27,7 @@ class AchievementsContainer extends Component {
       switch (payment.sender) {
         case IBAN_CATEGORIES.IBAN1_TRANSPORT:
           formattedPayments.push({
-            color: PieColors.trans,
+            color: PieColors.transportation,
             title: 'Transport',
             amount: payment.amount,
             timestamp: payment.timestamp
@@ -92,12 +92,15 @@ class AchievementsContainer extends Component {
         </View>
         <View style={styles.graphContainer}>
           <Text style={[styles.heading, styles.lHeadingMargin]}>Achievements</Text>
-          <PaymentGraph
-            transportation={this.props.payments.transport}
-            labor={this.props.payments.labor}
-            fishingnets={this.props.payments.fishingNets}
-            boatrental={this.props.payments.boatRental}
-            bank={this.props.payments.bank} />
+          { !this.props.isFetching ? 
+            <PaymentGraph
+              transportation={this.props.payments.transport}
+              labor={this.props.payments.labor}
+              fishingnets={this.props.payments.fishingNets}
+              boatrental={this.props.payments.boatRental}
+              bank={this.props.payments.bank} />
+            : null
+          }
         </View>
         <Text style={[styles.heading, styles.lHeadingMargin]}>Historical expenditures</Text>
         <View style={{ flex: 1, alignSelf: 'stretch' }}>
@@ -112,6 +115,7 @@ class AchievementsContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    fetching: state.payment.isFetching,
     payments: state.payment.payments,
     latestPayments: state.payment.data
   }

@@ -16,7 +16,7 @@ export default class PaymentList extends Component {
     return (
       <View>
         <FlatList
-          data={this.props.payments}
+          data={(this.props.payments).reverse()}
           renderItem={({ item }) => (
             <PaymentBox 
               paymentStyle={styles.paymentStyle} 

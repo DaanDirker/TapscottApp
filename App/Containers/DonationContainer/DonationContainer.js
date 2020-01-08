@@ -3,7 +3,9 @@ import LoadingSpinner from "../../Components/LoadingSpinner/LoadingSpinner"
 import { View, Text } from "react-native"
 import { connect } from 'react-redux'
 import {
-  fetchPayment
+  fetchPayment,
+  fetchPaymentObject,
+  fetchLatestPayments
 } from '../../Redux/actions/PaymentActions'
 
 import {
@@ -26,10 +28,15 @@ class DonationContainer extends Component {
     }
   }
 
+  componentDidMount() {
+    this.props.fetchLatestPayments()
+    this.props.fetchPayments()
+  }
+
   async handleCheckout(amount, name) {
     await this.props.fetchPayment(amount + ".00", name)
 
-    if (this.props.payment.data.checkoutUrl) {
+    if (this.props.payment.checkout.checkoutUrl) {
 
       const { navigate } = this.props.navigation
       navigate("Webview")
@@ -135,7 +142,9 @@ const mapDispatchToProps = (dispatch) => {
     setDonationAmount: (amount, custom) => dispatch(setDonationAmount(amount, custom)),
     setDonationCustom: (custom) => dispatch(setDonationCustom(custom)),
     setDonationName: (name) => dispatch(setDonationName(name)),
-    fetchPayment: (amount, name) => dispatch(fetchPayment(amount, name))
+    fetchPayment: (amount, name) => dispatch(fetchPayment(amount, name)),
+    fetchPayments: () => dispatch(fetchPaymentObject()),
+    fetchLatestPayments: () => dispatch(fetchLatestPayments())
   }
 }
 
