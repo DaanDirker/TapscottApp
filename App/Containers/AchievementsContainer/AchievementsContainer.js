@@ -7,7 +7,7 @@ import PaymentList from '../../Components/PaymentList/PaymentList'
 import { fetchPaymentObject, fetchLatestPayments } from "../../Redux/actions/PaymentActions";
 
 import { IBAN_CATEGORIES } from '../../Utils/Constants'
-import PieColors from '../../Utils/Constants'
+import { PieColors } from '../../Utils/Colors'
 
 import styles from './AchievementsContainerStyles'
 
@@ -25,10 +25,10 @@ class AchievementsContainer extends Component {
     console.log('FORMATTING PAYMENTS')
 
     list.forEach((payment) => {
-      switch(payment.sender) {
+      switch (payment.sender) {
         case IBAN_CATEGORIES.IBAN1_TRANSPORT:
           formattedPayments.push({
-            color: PieColors.transport,
+            color: PieColors.trans,
             title: 'Transport',
             amount: payment.amount,
             timestamp: payment.timestamp
@@ -58,7 +58,7 @@ class AchievementsContainer extends Component {
             timestamp: payment.timestamp
           })
           break
-        case IBAN_CATEGORIES.IBAN5_BANK: 
+        case IBAN_CATEGORIES.IBAN5_BANK:
           formattedPayments.push({
             color: PieColors.bank,
             title: 'Bank',
@@ -66,7 +66,7 @@ class AchievementsContainer extends Component {
             timestamp: payment.timestamp
           })
           break
-        default: 
+        default:
           formattedPayments.push({
             color: '#FFFFFF',
             title: 'Unknown',
@@ -86,7 +86,7 @@ class AchievementsContainer extends Component {
     for (let key in this.props.payments) {
       total += this.props.payments[key]
     }
-    
+
     if (total == 0) {
       return (
         <PaymentGraph
@@ -104,7 +104,7 @@ class AchievementsContainer extends Component {
         labor={this.props.payments.labor}
         fishingnets={this.props.payments.fishingNets}
         boatrental={this.props.payments.boatRental}
-        bank={this.props.payments.bank}/>
+        bank={this.props.payments.bank} />
     )
   }
 
@@ -114,20 +114,20 @@ class AchievementsContainer extends Component {
         <View style={styles.aboutContainer}>
           <Text style={[styles.heading, styles.headingMargin]}>About us</Text>
           <Text style={[styles.text, styles.aboutText]}>
-            Tapscott was founded in 2018 by a Dutch group of blockchain students. 
-            Their goal was to help the environment by cleaning the ocean. Every dollar equals ten less kilo’s 
-            of plastic floating in the ocean. Every donation and expenditure 
+            Tapscott was founded in 2018 by a Dutch group of blockchain students.
+            Their goal was to help the environment by cleaning the ocean. Every dollar equals ten less kilo’s
+            of plastic floating in the ocean. Every donation and expenditure
             will be logged and can be seen on the blockchain.
           </Text>
         </View>
         <View style={styles.graphContainer}>
           <Text style={[styles.heading, styles.lHeadingMargin]}>Achievements</Text>
-          {this.renderGraph()}
+          {/* {this.renderGraph()} */}
         </View>
         <Text style={[styles.heading, styles.lHeadingMargin]}>Historical expenditures</Text>
-        <View style={{flex: 1, alignSelf: 'stretch'}}>
+        <View style={{ flex: 1, alignSelf: 'stretch' }}>
           <ScrollView style={styles.expendituresContainer} nestedScrollEnabled={true}>
-            {/* <PaymentList payments={this.formatPayments(this.props.latestPayments)}/> */}
+            <PaymentList payments={this.formatPayments(this.props.latestPayments)} />
           </ScrollView>
         </View>
       </View>
