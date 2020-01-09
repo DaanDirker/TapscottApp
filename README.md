@@ -18,6 +18,8 @@ We use NPM to install all of the modules and packages needed to run the project.
 ```bash
 npm i
 ```
+To get an interaction with the back-end to make payments, a constant value has to be changed containing the *ngrok* url. This can be required after starting It on a port. Open the *Constants.js* file and change the *apiBaseUrl* value to the newly created link. After that you're ready to proceed with running the front-end.
+
 
 ## Running the frontend
 
