@@ -1,4 +1,4 @@
-export const apiBaseUrl = "http://cc37ac40.ngrok.io"
+export const apiBaseUrl = "http://79b54f4d.ngrok.io"
 
 export const BOTTOM_NAV_DONATION = "BOTTOM_NAV_DONATION"
 export const BOTTOM_NAV_ACHIEVEMENTS = "BOTTOM_NAV_ACHIEVEMENTS"

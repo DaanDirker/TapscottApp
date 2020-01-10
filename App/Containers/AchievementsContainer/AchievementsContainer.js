@@ -78,6 +78,44 @@ class AchievementsContainer extends Component {
     return formattedPayments
   }
 
+  renderHistoricalExpenditures() {
+    if (this.props.latestPayments.length !== 0) {
+      return (
+        <View style={{ flex: 1, alignSelf: 'stretch' }}>
+          <Text style={[styles.heading, styles.lHeadingMargin, {alignSelf: 'center'}]}>Historical expenditures</Text>
+          <View>
+            <ScrollView style={styles.expendituresContainer} nestedScrollEnabled={true}>
+              <PaymentList payments={this.formatPayments(this.props.latestPayments)}/>
+            </ScrollView>
+          </View>
+        </View>
+      )
+    }
+  }
+
+  renderPaymentGraph() {
+    let total = 0
+
+    //Sum the total amount of payments
+    for (let element in this.props.payments) {
+      total += this.props.payments[element]
+    }
+
+    if (total !== 0 ) {
+      return (
+        <View style={styles.graphContainer}>
+          <Text style={[styles.heading, styles.lHeadingMargin]}>Achievements</Text>
+          <PaymentGraph
+            transportation={this.props.payments.transport}
+            labor={this.props.payments.labor}
+            fishingnets={this.props.payments.fishingNets}
+            boatrental={this.props.payments.boatRental}
+            bank={this.props.payments.bank} />
+        </View>
+      )
+    }
+  }
+
   render() {
     return (
       <View style={styles.achievementsContainer}>
@@ -90,24 +128,8 @@ class AchievementsContainer extends Component {
             will be logged and can be seen on the blockchain.
           </Text>
         </View>
-        <View style={styles.graphContainer}>
-          <Text style={[styles.heading, styles.lHeadingMargin]}>Achievements</Text>
-          { !this.props.isFetching ? 
-            <PaymentGraph
-              transportation={this.props.payments.transport}
-              labor={this.props.payments.labor}
-              fishingnets={this.props.payments.fishingNets}
-              boatrental={this.props.payments.boatRental}
-              bank={this.props.payments.bank} />
-            : null
-          }
-        </View>
-        <Text style={[styles.heading, styles.lHeadingMargin]}>Historical expenditures</Text>
-        <View style={{ flex: 1, alignSelf: 'stretch' }}>
-          <ScrollView style={styles.expendituresContainer} nestedScrollEnabled={true}>
-            <PaymentList payments={this.formatPayments(this.props.latestPayments)}/>
-          </ScrollView>
-        </View>
+        { this.renderPaymentGraph() }
+        { this.renderHistoricalExpenditures() }
       </View>
     )
   }
@@ -117,7 +139,7 @@ const mapStateToProps = (state) => {
   return {
     fetching: state.payment.isFetching,
     payments: state.payment.payments,
-    latestPayments: state.payment.data
+    latestPayments: state.payment.latestPayments
   }
 }
 
