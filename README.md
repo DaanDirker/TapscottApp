@@ -4,7 +4,7 @@
 
 For this Project we have made an application to donate money to the greater good. In our app you can contribute money to save the ocean. With your donation we get the supplies needed to make the ocean clean. Donations are stored on a secure and trustworthy blockchain. Not only donations but also payments from the company will be saved on the blockchain. On the achievements page in the app a user can see how much and on what we spend the donated money to save the ocean. With this the user can fully see where the money is going so that every penny will go to the good cause. 
 
-![](doc/img/Project.png)
+![](/doc/img/project.png)
 
 This is the frontend app side running on React Native with Redux. 
 
